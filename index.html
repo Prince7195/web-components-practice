@@ -6,6 +6,7 @@
     <title>Web Components</title>
     <script src="tooltip.js"></script>
     <script src="confirm-link.js"></script>
+    <script src="modal.js"></script>
     <style>
       * {
         box-sizing: border-box;
@@ -13,6 +14,7 @@
 
       html {
         --color-grey: #eee;
+        margin: 2rem;
         font-family: sans-serif;
       }
     </style>
@@ -25,7 +27,33 @@
       are awasome!
     </p>
     <uc-tooltip></uc-tooltip>
-    <div></div>
+    <br />
     <a is="uc-confirm-link" href="https://www.google.com">Google</a>
+    <br /><br /><br />
+    <uc-modal>
+      <h1 slot="title">Please confirm</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime maiores
+        doloremque aperiam, inventore alias velit laboriosam quod corporis,
+        excepturi assumenda ad tempora culpa beatae.
+      </p>
+    </uc-modal>
+    <button>Show Confirm</button>
+    <script>
+      const confirmBtn = document.querySelector("button");
+      const modal = document.querySelector("uc-modal");
+      modal.addEventListener("cancel", () => {
+        console.log("Cancelling...");
+      });
+      modal.addEventListener("confirm", () => {
+        console.log("Confirming...");
+      });
+      confirmBtn.addEventListener("click", () => {
+        // modal.setAttribute("opened", "");
+        if (!modal.isOpen) {
+          modal.open();
+        }
+      });
+    </script>
   </body>
 </html>
